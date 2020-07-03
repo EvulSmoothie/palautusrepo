@@ -13,8 +13,6 @@ const App = (props) => {
   
   const [points, setPoints] = useState([0,0,0,0,0,0])
 
-  const maxIndex = 0
-
   const hancleClick = () =>{
     setSelected(Math.floor(Math.random()*6))
   }
