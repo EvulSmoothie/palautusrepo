@@ -1,8 +1,10 @@
 import React from 'react'
-
-const Person = ({person}) => {
+//Yksittäisen henkilön tietojen renderöinti (sekä delete nappi kyseiselle henkilölle)
+const Person = ({person, deletePerson}) => {
     return(
-      <li>{person.name} {person.number}</li> 
+      <li>{person.name} {person.number}
+      <button onClick={deletePerson}>Delete</button>
+      </li> 
     )
   }
 

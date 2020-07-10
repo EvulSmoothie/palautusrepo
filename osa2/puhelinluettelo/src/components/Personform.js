@@ -1,5 +1,5 @@
 import React from 'react'
-
+//Henkilon lisäys lomakkeen renderöinti
 const Personform = (props) =>{
     return(
       <form onSubmit={props.addPerson}>

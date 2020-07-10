@@ -1,5 +1,5 @@
 import React from 'react'
-
+//Filter kentän renderöinti
 const Filter = (props) => {
     return(
       <div>filter: <input
