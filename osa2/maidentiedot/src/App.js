@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { useState, useEffect } from 'react'
+import dataService from './services/countries'
+import Countries from './components/countries'
 
-function App() {
+const App = () => {
+  const [filter, setFilter] = useState('')
+  const [countries, setCountries] = useState([])
+
+  useEffect(() =>{
+    dataService
+    .getAll()
+    .then(response => {
+      setCountries(response.data)
+    })
+  }, [])
+
+  const handleFilterInput = (event) =>{
+    setFilter(event.target.value)
+  }
+
+  const showCountry = (country) =>{
+    setFilter(country.name)
+  }
+
+  const countriesToShow = countries.filter(country => country.name.toLowerCase().includes(filter.toLowerCase()))
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      find countries <input value ={filter} onChange = {handleFilterInput}/>
+      <ul>
+        <Countries countriesToShow = {countriesToShow} showCountry = {showCountry} />
+      </ul>
     </div>
   );
 }

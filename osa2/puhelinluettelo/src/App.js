@@ -3,7 +3,9 @@ import Person from './components/Person.js'
 import Personform from './components/Personform'
 import Filter from './components/Filter'
 import personService from './services/persons'
-import persons from './services/persons'
+import Notification from './components/Notification'
+import Alert from './components/Alert'
+import './index.css'
 
 
 
@@ -13,6 +15,8 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [popMessage, setMessage] = useState(null)
+  const [alertMessage, setAlertMessage] = useState(null)
   //Haetaan serveriltä olemassa oleva listaus
   useEffect(() => {
     personService
@@ -31,6 +35,12 @@ const App = () => {
       .getAll()
         .then(response => {
           setPersons(response.data)
+          setMessage(
+            `Person '${person.name}' was removed from server`
+          )
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
         })
     })
     .catch(error => {
@@ -62,7 +72,23 @@ const App = () => {
         personService.update(findPerson(newName).id, newPerson)
         .then(response => {
           setPersons(persons.map(person => person.id !== findPerson(newName).id ? person : response.data))
+          setMessage(
+            `Persons '${newPerson.name}' number was updated to server`
+          )
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
         })
+        .catch(error => {
+          setAlertMessage(
+            `information of ${newPerson.name} was already deleted from server`
+          )
+          setTimeout(() => {
+            setAlertMessage(null)
+          }, 5000)
+          setPersons(persons.filter(n => n.id !== findPerson(newName).id))
+        })
+        
       }
     }
     else{
@@ -70,6 +96,12 @@ const App = () => {
       .create(newPerson)
       .then(response =>{
         setPersons(persons.concat(response.data))
+        setMessage(
+          `Person '${newPerson.name}' was added to server`
+        )
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
       })
   
     
@@ -93,6 +125,8 @@ const App = () => {
     //Appin renderöinti, kutsutaan komponentteja
     <div>
       <h2>Phonebook</h2>
+      <Notification message={popMessage} />
+      <Alert message={alertMessage} />
       <Filter filter ={filter} handleFilterInput = {handleFilterInput}/>
       <Personform addPerson ={addPerson} newName={newName} handleNameInput={handleNameInput} newNumber={newNumber} handleNumberInput={handleNumberInput}/>
       <h2>Numbers</h2>
