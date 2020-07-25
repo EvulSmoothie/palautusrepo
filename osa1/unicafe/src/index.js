@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-
+//Komponentti yksittäisen statistiikan näyttämiseen, saa propseina näytettävät tiedot ja esittää ne tablessa
 const StatLine = (props) => {
   return(
     <tr>
@@ -10,7 +10,7 @@ const StatLine = (props) => {
   )
   
 }
-
+//Komponentti statistiikan näyttöö, tarkistaa ensin onko näytettävää statistiikkaa ja jos on alkaa muodostaa niistä pöytää ja kutsu statlineä
 const Statistics = (props) => {
   if (props.total === 0) {
     return (
@@ -35,7 +35,7 @@ const Statistics = (props) => {
     </div>
   )
 }
-
+//Komponentti nappien muodostukselle, saa tekstin ja toiminnin ja muodostaa siitä napin
 const Button = ({ onClick, text }) => (
   <button onClick={onClick}>
     {text}
@@ -48,7 +48,7 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
   const [total, setTotal] = useState(0)
-
+  //Napeille toiminna käsittelijät, kasvatetaan jokaisessa vain relevanttia usestatea
   const handleGood = () => {
     setTotal(total+1)
     setGood(good+1)
@@ -64,7 +64,7 @@ const App = () => {
     setBad(bad+1)
 
   }
-
+//Appin renderöinti, muodostetaan komponenteista
   return (
     <div>
       <div>

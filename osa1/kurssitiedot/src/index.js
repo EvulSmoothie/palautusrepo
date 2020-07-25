@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
+//Komponentti otsikolle, saa tekstin ja muodostaa siitä otsikon (header1)
 const Header = (props) =>{
   return(
     <h1>{props.course}</h1>
   )
 }
+//Komponentti yksittäiselle osiolle, saa osan nimen ja harjoitusten määrän ja muodostaa niistä yhden paragraafin
 const Part = (props) =>{
   return(
     <p>
@@ -13,7 +14,7 @@ const Part = (props) =>{
     </p>
   )
 }
-
+//komponentti kurssin sisällölle, saa erineiset osat ja niiden harjoitus määrän ja kutsuu niillä yksittäisen osion komponenttia
 const Content = (props) =>{
   return(
     <div>
@@ -23,7 +24,7 @@ const Content = (props) =>{
     </div>
   )
 }
-
+//Komponentti harjoitusten laskemiselle, laskee yhteen saadut harjoitus määrät ja esittää sen
 const Total = (props) =>{
   return(
     <p>
@@ -33,6 +34,7 @@ const Total = (props) =>{
 }
 
 const App = () => {
+  //Kovakoodataan meille kurssin tiedot
   const course = {
     name: 'Half Stack application development',
     parts: [
@@ -52,6 +54,7 @@ const App = () => {
   }
 
   return (
+    //Appin renderöinti, kutsutaan eri komponentteja kovakoodatuilla tiedoilla
     <div>
       <Header course={course.name} />
       <Content part={course.parts[0].name} exercises={course.parts[0].exercises} part2={course.parts[1].name} exercises2={course.parts[1].exercises} part3={course.parts[2].name} exercises3={course.parts[2].exercises}/>

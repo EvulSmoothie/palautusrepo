@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-
+//Nappi komponentti, annetaan teksti sekä klikkaus toiminto ja generoidaan siitä nappi
 const Button = ({ onClick, text }) => (
   <button onClick={onClick}>
     {text}
@@ -9,13 +9,14 @@ const Button = ({ onClick, text }) => (
 
 
 const App = (props) => {
+  //Alustetaan use statet
   const [selected, setSelected] = useState(0)
-  
   const [points, setPoints] = useState([0,0,0,0,0,0])
-
+//Randomisointi klikkaus, arvotaan numero ja asetetaan sen kohdan anekdootti näkyviin
   const hancleClick = () =>{
     setSelected(Math.floor(Math.random()*6))
   }
+  //Äänestys klikkaus, liästään listaan kyseisen anekdootin kohdalle +1
   const handleVote = () => {
     const copy = points.splice(0)
     copy[selected] +=1
@@ -26,7 +27,7 @@ const App = (props) => {
   }
 
 
-
+//Renderöidään appi, näytetään yksi anekdootti, sen jälkeen napit, ja lopuksi eniten ääniä saanut anekdootti
   return (
     <div>
       <h1>Anecdote of the day</h1>
@@ -44,7 +45,7 @@ const App = (props) => {
     </div>
   )
 }
-
+//kovakoodattu lista anekdooteista
 const anecdotes = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
