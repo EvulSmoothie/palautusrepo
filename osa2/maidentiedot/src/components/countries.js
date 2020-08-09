@@ -1,16 +1,18 @@
+//Maa listan ja maan tietojen renderöinti
 import React from 'react'
 
 
 const Countries = ({countriesToShow, showCountry}) => {
-    
+    //Varmistetaan että maita on järkevä määrä näytettäväksi, eli enintään kymmenen
     if(countriesToShow.length > 1 && countriesToShow.length < 11){
+        //Jos on järkevä määrä, renderöidään maalista näkyviin
         return(
             <div>
         {countriesToShow.map((country, i) => <li key={i}>{country.name} <button onClick={()=>showCountry(country)}>show</button></li>)}
         </div>
         )
     }
-
+    //Jos maita on liikaa näytettäväksi ilmoitetaan siitä
     else if(countriesToShow.length>10){
         return(
             <div>
@@ -18,6 +20,7 @@ const Countries = ({countriesToShow, showCountry}) => {
             </div>
         )
     }
+    //Jos ei ole yhtään maata näytettäväksi, ilmoitetaan siitä
     else if(countriesToShow.length === 0){
         return(
             <div>
@@ -25,6 +28,7 @@ const Countries = ({countriesToShow, showCountry}) => {
             </div>
         )
     }
+    //Jos päästään tähän pisteeseen, tarkoittaa se että on vain yksi maa listassa, silloin se näytetään.
     else{
         return(
             <div>

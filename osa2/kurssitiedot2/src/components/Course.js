@@ -1,5 +1,6 @@
+//Kurssin renderöivä komponentti
 import React from 'react'
-
+//Kurssin otsikon renderöinti (oletettavasti kurssin nimi)
 const Header = (props) =>{
     return(
       <h1>{props.course}</h1>
@@ -7,7 +8,7 @@ const Header = (props) =>{
   }
   
 
-  
+  //Kurssin sisällön renderöinti
   const Content = (props) =>{
     return(
       <div>
@@ -15,7 +16,7 @@ const Header = (props) =>{
       </div>
     )
   }
-  
+  //Lasketaan ja renderöidään tehtävien kokonaismäärä kurssikohtaisesti
   const Total = (props) =>{
     const reducer = (accumulator, currentVal) => accumulator +currentVal
     const tulos = props.list.reduce(reducer)
@@ -27,11 +28,12 @@ const Header = (props) =>{
   }
 
   const Course = (props) =>{
-    
+    //Otetaan kurssin sisältö ja tehtävämäärä valmiiksi muuttujiin
     const partsCont = props.course.parts.map(part => <p key = {part.id}>{part.name} {part.exercises}</p> )
     const total = props.course.parts.map(part => part.exercises)
   
     return( 
+      //Kutsutaan eri komponentteja tarvittavilla tiedoilla
     <div>
       <Header course={props.course.name}/>
       <Content list = {partsCont}/>

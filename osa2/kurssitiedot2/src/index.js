@@ -5,6 +5,7 @@ import Course from './components/Course'
 
 
 const App = () => {
+  //Kovakoodattu lista näytettävistä kursseista
   const courses = [
     {
       name: 'Half Stack application development',
@@ -51,7 +52,7 @@ const App = () => {
   ]
 
   
-
+//Renderöintii, mapataan kurssit ja kutsutaan jokaiselle kurssin esittävää komponenttia
   return (
     <div>
       {courses.map((kurssi, i)=>{
